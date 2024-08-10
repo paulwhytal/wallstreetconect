@@ -38,9 +38,8 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <ul className="list-disc list-inside">
-              <li>Browse expert profiles</li>
-              <li>Get resume reviews</li>
-              <li>Book consultations</li>
+              <li>Schedule 1-on-1 calls with active professionals</li>
+              <li>Get your resume reviewed</li>
               <li>Access resources</li>
             </ul>
           </CardContent>

@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { SupabaseClient } from '@supabase/supabase-js';
 
 type AuthFormProps = {
   type: 'login' | 'signup';
@@ -17,7 +16,18 @@ export default function AuthForm({ type, userType }: AuthFormProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClientComponentClient<SupabaseClient>();
+  
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Missing env variables for Supabase');
+  }
+
+  const supabase = createClientComponentClient({
+    supabaseUrl,
+    supabaseKey,
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
